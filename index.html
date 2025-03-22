@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康评分计算器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>肝硬化健康评分计算器</h1>
+        <form id="health-form">
+            <label for="ggt">GGT:</label>
+            <input type="number" id="ggt" name="ggt" required>
+
+            <label for="age">年龄:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="tc">TC:</label>
+            <input type="number" id="tc" name="tc" required>
+
+            <label for="is_female">性别:</label>
+            <select id="is_female" name="is_female" required>
+                <option value="0">男性</option>
+                <option value="1">女性</option>
+            </select>
+
+            <label for="ast">AST:</label>
+            <input type="number" id="ast" name="ast" required>
+
+            <label for="has_diabetes">是否有糖尿病:</label>
+            <select id="has_diabetes" name="has_diabetes" required>
+                <option value="0">否</option>
+                <option value="1">是</option>
+            </select>
+
+            <label for="hdl">HDL:</label>
+            <input type="number" id="hdl" name="hdl" required>
+
+            <label for="bmi">BMI:</label>
+            <input type="number" id="bmi" name="bmi" required>
+
+            <button type="submit">计算评分</button>
+        </form>
+
+        <h2>评分结果:</h2>
+        <p id="result"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
