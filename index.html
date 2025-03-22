@@ -1,50 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>健康评分计算器</title>
+    <title>Liver Health Calculator / 肝脏健康评分</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <div class="language-switch">
+        <button onclick="changeLanguage('en')">EN</button>
+        <button onclick="changeLanguage('zh')">中文</button>
+    </div>
+
     <div class="container">
-        <h1>肝硬化健康评分计算器</h1>
+        <div class="header">
+            <img src="images/medical-icon.png" alt="Medical Icon" class="icon">
+            <h1 data-i18n="title">Liver Cirrhosis Risk Calculator</h1>
+            <h2 data-i18n="subtitle">Based on Clinical Prediction Model</h2>
+        </div>
+
         <form id="health-form">
-            <label for="ggt">GGT:</label>
-            <input type="number" id="ggt" name="ggt" required>
+            <!-- 输入字段使用data-i18n-placeholder属性 -->
+            <div class="form-group">
+                <label data-i18n="ggt">GGT (U/L)</label>
+                <input type="number" id="ggt" step="0.1" required 
+                       data-i18n-placeholder="enter_ggt">
+            </div>
 
-            <label for="age">年龄:</label>
-            <input type="number" id="age" name="age" required>
+            <!-- 其他输入字段使用相同模式... -->
 
-            <label for="tc">TC:</label>
-            <input type="number" id="tc" name="tc" required>
+            <div class="form-row">
+                <div class="form-group">
+                    <label data-i18n="gender">Gender</label>
+                    <select id="is_female" required>
+                        <option value="0" data-i18n="male">Male</option>
+                        <option value="1" data-i18n="female">Female</option>
+                    </select>
+                </div>
 
-            <label for="is_female">性别:</label>
-            <select id="is_female" name="is_female" required>
-                <option value="0">男性</option>
-                <option value="1">女性</option>
-            </select>
+                <div class="form-group">
+                    <label data-i18n="diabetes">Diabetes</label>
+                    <select id="has_diabetes" required>
+                        <option value="0" data-i18n="no">No</option>
+                        <option value="1" data-i18n="yes">Yes</option>
+                    </select>
+                </div>
+            </div>
 
-            <label for="ast">AST:</label>
-            <input type="number" id="ast" name="ast" required>
-
-            <label for="has_diabetes">是否有糖尿病:</label>
-            <select id="has_diabetes" name="has_diabetes" required>
-                <option value="0">否</option>
-                <option value="1">是</option>
-            </select>
-
-            <label for="hdl">HDL:</label>
-            <input type="number" id="hdl" name="hdl" required>
-
-            <label for="bmi">BMI:</label>
-            <input type="number" id="bmi" name="bmi" required>
-
-            <button type="submit">计算评分</button>
+            <button type="submit" data-i18n="calculate">Calculate Risk</button>
         </form>
 
-        <h2>评分结果:</h2>
-        <p id="result"></p>
+        <div class="result-box">
+            <h3 data-i18n="result_title">Your Risk Probability</h3>
+            <div id="result" class="result-value">0%</div>
+            <div class="risk-scale">
+                <div class="risk-level low" data-i18n="low_risk">Low</div>
+                <div class="risk-level medium" data-i18n="medium_risk">Medium</div>
+                <div class="risk-level high" data-i18n="high_risk">High</div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
