@@ -1,56 +1,122 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.language-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.language-switch button {
+    background: rgba(255,255,255,0.9);
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    max-width: 800px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-h1 {
+.header {
     text-align: center;
+    margin-bottom: 30px;
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.form-group {
     margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
 input, select {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: #fff;
+input:focus, select:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+}
+
+button[type="submit"] {
+    background: var(--secondary-color);
+    color: white;
+    padding: 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
 }
 
-button:hover {
-    background-color: #218838;
+button[type="submit"]:hover {
+    background: #2980b9;
 }
 
-#result {
-    margin-top: 20px;
-    font-size: 1.2em;
+.result-box {
+    margin-top: 30px;
     text-align: center;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
 }
+
+.result-value {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+.risk-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.risk-level {
+    flex: 1;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.low { background: #27ae60; }
+.medium { background: #f1c40f; }
+.high { background: #e74c3c; }
