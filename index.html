@@ -20,9 +20,9 @@
         </div>
 
         <form id="health-form">
-            <div class="form-row">
-                <!-- 第一列 -->
-                <div class="form-column">
+            <div class="form-columns">
+                <!-- 左列 - 人口学特征 -->
+                <div class="form-column demographic">
                     <div class="form-group">
                         <label data-i18n="age">Age</label>
                         <input type="number" id="age" min="18" max="120" step="1" required>
@@ -40,10 +40,18 @@
                         <label data-i18n="bmi">BMI</label>
                         <input type="number" id="bmi" min="10" max="50" step="0.1" required>
                     </div>
+
+                    <div class="form-group">
+                        <label data-i18n="diabetes">Region</label>
+                        <select id="has_diabetes" required>
+                            <option value="0" data-i18n="no">No</option>
+                            <option value="1" data-i18n="yes">Yes</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- 第二列 -->
-                <div class="form-column">
+                <!-- 右列 - 检查指标 -->
+                <div class="form-column indicators">
                     <div class="form-group">
                         <label data-i18n="ggt">GGT (U/L)</label>
                         <input type="number" id="ggt" min="0" step="0.01" required>
@@ -58,24 +66,15 @@
                         <label data-i18n="tc">Total Cholesterol (mg/dL)</label>
                         <input type="number" id="tc" min="0" step="0.01" required>
                     </div>
-                </div>
 
-                <!-- 第三列 -->
-                <div class="form-column">
                     <div class="form-group">
                         <label data-i18n="hdl">HDL (mg/dL)</label>
                         <input type="number" id="hdl" min="0" step="0.01" required>
                     </div>
-
-                    <div class="form-group">
-                        <label data-i18n="diabetes">Diabetes</label>
-                        <select id="has_diabetes" required>
-                            <option value="0" data-i18n="no">No</option>
-                            <option value="1" data-i18n="yes">Yes</option>
-                        </select>
-                    </div>   
                 </div>
             </div>
+
+
 
             <div class="form-actions">
                 <button type="submit" data-i18n="calculate">Calculate Risk</button>
@@ -83,6 +82,7 @@
             </div>
         </form>
 
+        <!-- 结果和免责声明部分保持不变 -->
         <div class="result-box">
             <h3 data-i18n="result_title">Your Risk Probability</h3>
             <div class="result-display">
