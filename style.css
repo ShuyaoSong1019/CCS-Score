@@ -74,6 +74,12 @@ body {
     gap: 30px;
     margin-bottom: 20px;
 }
+.form-column.demographic {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
 .form-column.indicators {
     background: #f5f7fa;
     padding: 20px;
