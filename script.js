@@ -1,31 +1,76 @@
-document.getElementById('health-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+// 多语言配置
+const i18n = {
+    en: {
+        title: "Liver Cirrhosis Risk Calculator",
+        subtitle: "Clinical Prediction Model",
+        ggt: "GGT (U/L)",
+        age: "Age",
+        tc: "Total Cholesterol (mg/dL)",
+        gender: "Gender",
+        male: "Male",
+        female: "Female",
+        ast: "AST (U/L)",
+        diabetes: "Diabetes",
+        yes: "Yes",
+        no: "No",
+        hdl: "HDL (mg/dL)",
+        bmi: "BMI",
+        calculate: "Calculate Risk",
+        result_title: "Your Risk Probability",
+        low_risk: "Low Risk",
+        medium_risk: "Medium Risk",
+        high_risk: "High Risk",
+        enter_ggt: "Enter GGT value"
+    },
+    zh: {
+        title: "肝硬化风险计算器",
+        subtitle: "临床预测模型",
+        ggt: "谷氨酰转肽酶 (U/L)",
+        age: "年龄",
+        tc: "总胆固醇 (mg/dL)",
+        gender: "性别",
+        male: "男性",
+        female: "女性",
+        ast: "谷草转氨酶 (U/L)",
+        diabetes: "糖尿病史",
+        yes: "有",
+        no: "无",
+        hdl: "高密度脂蛋白 (mg/dL)",
+        bmi: "身体质量指数",
+        calculate: "计算风险",
+        result_title: "您的风险概率",
+        low_risk: "低风险",
+        medium_risk: "中风险",
+        high_risk: "高风险",
+        enter_ggt: "请输入GGT值"
+    }
+};
 
-    // 获取用户输入
-    const ggt = parseFloat(document.getElementById('ggt').value);
-    const age = parseFloat(document.getElementById('age').value);
-    const tc = parseFloat(document.getElementById('tc').value);
-    const is_female = parseInt(document.getElementById('is_female').value);
-    const ast = parseFloat(document.getElementById('ast').value);
-    const has_diabetes = parseInt(document.getElementById('has_diabetes').value);
-    const hdl = parseFloat(document.getElementById('hdl').value);
-    const bmi = parseFloat(document.getElementById('bmi').value);
+// 语言切换功能
+function changeLanguage(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = i18n[lang][key];
+    });
+    
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.placeholder = i18n[lang][key];
+    });
+}
 
-    // 计算评分
-    const score = final_model_score4(ggt, age, tc, is_female, ast, has_diabetes, hdl, bmi);
+// 初始化为中文
+changeLanguage('zh');
 
-    // 显示结果
-    document.getElementById('result').innerText = `您的健康评分为: ${score.toFixed(2)}`;
-});
-
-function final_model_score4(ggt, age, tc, is_female, ast, has_diabetes, hdl, bmi) {
+// 更新后的计算公式
+function calculateRisk(ggt, age, tc, is_female, ast, has_diabetes, hdl, bmi) {
     const pmax = (x, y) => Math.max(x, y);
-
+    
     const score = -5.239626 +
         0.10879714 * ggt -
         0.0001017148 * Math.pow(pmax(ggt - 13.4, 0), 3) +
         0.00013169036 * Math.pow(pmax(ggt - 22.3, 0), 3) -
-        2.9975555e-05 * Math.pow(pmax(ggt - 52.5, 0), 3) +
+        2.9975555e-5 * Math.pow(pmax(ggt - 52.5, 0), 3) +
         0.046680734 * age -
         0.1056094 * tc -
         5.6458036 * is_female +
@@ -41,5 +86,39 @@ function final_model_score4(ggt, age, tc, is_female, ast, has_diabetes, hdl, bmi
             0.0059768578 * Math.pow(pmax(bmi - 24.200001, 0), 3) -
             0.0027799345 * Math.pow(pmax(bmi - 28.799999, 0), 3));
 
-    return score;
+    // 应用logistic函数转换
+    const probability = 1 / (1 + Math.exp(-score));
+    return probability;
 }
+
+// 表单提交处理
+document.getElementById('health-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const inputs = {
+        ggt: parseFloat(document.getElementById('ggt').value),
+        age: parseFloat(document.getElementById('age').value),
+        tc: parseFloat(document.getElementById('tc').value),
+        is_female: parseInt(document.getElementById('is_female').value),
+        ast: parseFloat(document.getElementById('ast').value),
+        has_diabetes: parseInt(document.getElementById('has_diabetes').value),
+        hdl: parseFloat(document.getElementById('hdl').value),
+        bmi: parseFloat(document.getElementById('bmi').value)
+    };
+
+    const risk = calculateRisk(...Object.values(inputs));
+    const riskPercent = (risk * 100).toFixed(1);
+    
+    // 更新结果显示
+    document.getElementById('result').textContent = `${riskPercent}%`;
+    
+    // 更新风险等级颜色
+    document.querySelectorAll('.risk-level').forEach(el => el.style.opacity = 0.3);
+    if (risk < 0.02) {
+        document.querySelector('.low').style.opacity = 1;
+    } else if (risk < 0.1) {
+        document.querySelector('.medium').style.opacity = 1;
+    } else {
+        document.querySelector('.high').style.opacity = 1;
+    }
+});
