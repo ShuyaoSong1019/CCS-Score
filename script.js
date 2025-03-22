@@ -20,29 +20,37 @@ const i18n = {
         low_risk: "Low Risk",
         medium_risk: "Medium Risk",
         high_risk: "High Risk",
-        enter_ggt: "Enter GGT value"
+        enter_ggt: "Enter GGT value",
+        disclaimer_title: "Important Notice",
+        disclaimer_1: "This tool provides risk estimates based on statistical models and should not replace professional medical advice.",
+        disclaimer_2: "Calculation results may vary with individual health conditions and laboratory methods.",
+        disclaimer_3: "We do not store any user input data."
     },
     zh: {
         title: "肝硬化风险计算器",
         subtitle: "临床预测模型",
-        ggt: "谷氨酰转肽酶 (U/L)",
+        ggt: "谷氨酰转肽酶GGT (U/L)",
         age: "年龄",
-        tc: "总胆固醇 (mg/dL)",
+        tc: "总胆固醇TC (mg/dL)",
         gender: "性别",
         male: "男性",
         female: "女性",
-        ast: "谷草转氨酶 (U/L)",
+        ast: "谷草转氨酶AST (U/L)",
         diabetes: "糖尿病史",
         yes: "有",
         no: "无",
-        hdl: "高密度脂蛋白 (mg/dL)",
-        bmi: "身体质量指数",
+        hdl: "高密度脂蛋白HDL (mg/dL)",
+        bmi: "身体质量指数BMI",
         calculate: "计算风险",
         result_title: "您的风险概率",
         low_risk: "低风险",
         medium_risk: "中风险",
         high_risk: "高风险",
-        enter_ggt: "请输入GGT值"
+        enter_ggt: "请输入GGT值",
+        disclaimer_title: "重要声明",
+        disclaimer_1: "本工具基于统计学模型提供风险评估，不能替代专业医疗诊断",
+        disclaimer_2: "计算结果可能因个体健康状况和检测方法不同存在差异",
+        disclaimer_3: "我们不会存储任何用户输入数据"
     }
 };
 
@@ -59,8 +67,8 @@ function changeLanguage(lang) {
     });
 }
 
-// 初始化为中文
-changeLanguage('zh');
+// 初始化为英文
+changeLanguage('en');
 
 // 更新后的计算公式
 function calculateRisk(ggt, age, tc, is_female, ast, has_diabetes, hdl, bmi) {
