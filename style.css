@@ -50,17 +50,27 @@ body {
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 增加列内元素间距 */
+    padding: 15px;
+    background: rgba(245, 245, 245, 0.5);
+    border-radius: 8px;
 }
 
 input, select {
-    width: 100%;
+    width: 90%;
     padding: 12px;
     border: 2px solid #eee;
     border-radius: 8px;
