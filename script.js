@@ -2,7 +2,7 @@
 const i18n = {
     en: {
         title: "Liver Cirrhosis Risk Calculator",
-        subtitle: "Clinical Prediction Model",
+        subtitle: "Chinese Cirrhosis Prediction Score Model",
         ggt: "GGT (U/L)",
         age: "Age",
         tc: "Total Cholesterol (mg/dL)",
@@ -24,11 +24,12 @@ const i18n = {
         disclaimer_title: "Important Notice",
         disclaimer_1: "This tool provides risk estimates based on statistical models and should not replace professional medical advice.",
         disclaimer_2: "Calculation results may vary with individual health conditions and laboratory methods.",
-        disclaimer_3: "We do not store any user input data."
+        disclaimer_3: "We do not store any user input data.",
+        disclaimer_4: "Developed by School of Public Health, Peking University"
     },
     zh: {
         title: "肝硬化风险计算器",
-        subtitle: "临床预测模型",
+        subtitle: "中国成年人肝硬化风险评分模型",
         ggt: "谷氨酰转肽酶GGT (U/L)",
         age: "年龄",
         tc: "总胆固醇TC (mg/dL)",
@@ -50,7 +51,8 @@ const i18n = {
         disclaimer_title: "重要声明",
         disclaimer_1: "本工具基于统计学模型提供风险评估，不能替代专业医疗诊断",
         disclaimer_2: "计算结果可能因个体健康状况和检测方法不同存在差异",
-        disclaimer_3: "我们不会存储任何用户输入数据"
+        disclaimer_3: "我们不会存储任何用户输入数据",
+        disclaimer_4: "北京大学公共卫生学院 开发"
     }
 };
 
@@ -58,7 +60,11 @@ const i18n = {
 function changeLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        el.textContent = i18n[lang][key];
+        if (el.tagName === 'LI') {
+            el.innerHTML = i18n[lang][key]; // 允许基础HTML
+        } else {
+            el.textContent = i18n[lang][key];
+        }
     });
     
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {

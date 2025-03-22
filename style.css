@@ -129,6 +129,7 @@ button[type="submit"]:hover {
     background: #fff8f8;
     border-left: 4px solid #e74c3c;
     border-radius: 5px;
+    font-size: 13px; /* 增大基础字号 */
 }
 
 .disclaimer-box h4 {
